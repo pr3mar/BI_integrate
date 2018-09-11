@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="117"
-  DTS:VersionGUID="{5CF5FB2D-BB33-4418-AD87-D99963C5A049}">
+  DTS:VersionBuild="121"
+  DTS:VersionGUID="{DE3F0FB2-8A42-4950-B47E-DB8093BCC6DB}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -54,7 +54,7 @@
         <SQLTask:SqlTaskData
           SQLTask:Connection="{C9C50E2A-F29B-496B-B77A-EC7F8882ABFE}"
           SQLTask:BypassPrepare="False"
-          SQLTask:SqlStatementSource="DELETE FROM [dbo].[DataEntry];&#xA;                             DELETE FROM [dbo].[DataType];&#xA;                                                           DELETE FROM [dbo].[DeviceJourney];&#xA;                                                                                         DELETE FROM [dbo].[Notification];&#xA;                                                                                                                       DELETE FROM [dbo].[GeoFenceCoordinates];&#xA;                                                                                                                                                     DELETE FROM [dbo].[GeoFence];&#xA;                                                                                                                                                                                   DELETE FROM [dbo].[NotificationPreferences];&#xA;                                                                                                                                                                                                                 DELETE FROM [dbo].[Device];&#xA;                                                                                                                                                                                                                                               DELETE FROM [dbo].[DeviceType];&#xA;                                                                                                                                                                                                                                                                             DELETE FROM [dbo].[NotificationCategory]; DBCC checkident('[dbo].[DeviceType]', RESEED, 0); &#xA;                                                                                                                                                                                                                                                                                                       DBCC checkident('[dbo].[DataType]', RESEED, 0); DBCC checkident('[dbo].[DataEntry]', RESEED, 0); &#xA;                                                                                                                                                                                                                                                                                                       DBCC checkident('[dbo].[GeoFenceCoordinates]', RESEED, 0); DBCC checkident('[dbo].[Notification]', &#xA;                                                                                                                                                                                                                                                                                                       RESEED, 0);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="DELETE FROM [dbo].[DataEntry];&#xA;DELETE FROM [dbo].[DataType];&#xA;DELETE FROM [dbo].[Users];&#xA;DELETE FROM [dbo].[DeviceJourney];&#xA;DELETE FROM [dbo].[Notification];&#xA;DELETE FROM [dbo].[GeoFenceCoordinates];&#xA;DELETE FROM [dbo].[GeoFence];&#xA;DELETE FROM [dbo].[NotificationPreferences];&#xA;DELETE FROM [dbo].[Device];&#xA;DELETE FROM [dbo].[DeviceType];&#xA;DELETE FROM [dbo].[NotificationCategory]; DBCC checkident('[dbo].[DeviceType]', RESEED, 0); &#xA;DBCC checkident('[dbo].[DataType]', RESEED, 0); DBCC checkident('[dbo].[DataEntry]', RESEED, 0); &#xA;DBCC checkident('[dbo].[GeoFenceCoordinates]', RESEED, 0); DBCC checkident('[dbo].[Notification]', RESEED, 0);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -6956,250 +6956,6 @@ WHERE        (DeviceId IS NOT NULL)</property>
               </outputs>
             </component>
             <component
-              refId="Package\Transfer DataEntries\Sort data entry"
-              componentClassID="Microsoft.Sort"
-              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
-              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
-              name="Sort data entry"
-              version="1">
-              <properties>
-                <property
-                  dataType="System.Boolean"
-                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
-                  name="EliminateDuplicates">false</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the maximum number of threads to use for sorting."
-                  expressionType="Notify"
-                  name="MaximumThreads">-1</property>
-              </properties>
-              <inputs>
-                <input
-                  refId="Package\Transfer DataEntries\Sort data entry.Inputs[Sort Input]"
-                  name="Sort Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Transfer DataEntries\Sort data entry.Inputs[Sort Input].Columns[ID]"
-                      cachedDataType="i8"
-                      cachedName="ID"
-                      lineageId="Package\Transfer DataEntries\OLTP data entry.Outputs[OLE DB Source Output].Columns[ID]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the comparison options for character data."
-                          name="NewComparisonFlags">0</property>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">1</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Transfer DataEntries\Sort data entry.Inputs[Sort Input].Columns[JourneyId]"
-                      cachedDataType="guid"
-                      cachedName="JourneyId"
-                      lineageId="Package\Transfer DataEntries\OLTP data entry.Outputs[OLE DB Source Output].Columns[JourneyId]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the comparison options for character data."
-                          name="NewComparisonFlags">0</property>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">0</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Transfer DataEntries\Sort data entry.Inputs[Sort Input].Columns[DeviceId]"
-                      cachedDataType="guid"
-                      cachedName="DeviceId"
-                      lineageId="Package\Transfer DataEntries\OLTP data entry.Outputs[OLE DB Source Output].Columns[DeviceId]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the comparison options for character data."
-                          name="NewComparisonFlags">0</property>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">0</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Transfer DataEntries\Sort data entry.Inputs[Sort Input].Columns[DateStored]"
-                      cachedDataType="dbTimeStamp"
-                      cachedName="DateStored"
-                      lineageId="Package\Transfer DataEntries\OLTP data entry.Outputs[OLE DB Source Output].Columns[DateStored]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the comparison options for character data."
-                          name="NewComparisonFlags">0</property>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">0</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Transfer DataEntries\Sort data entry.Inputs[Sort Input].Columns[DateReceived]"
-                      cachedDataType="dbTimeStamp"
-                      cachedName="DateReceived"
-                      lineageId="Package\Transfer DataEntries\OLTP data entry.Outputs[OLE DB Source Output].Columns[DateReceived]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the comparison options for character data."
-                          name="NewComparisonFlags">0</property>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">0</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Transfer DataEntries\Sort data entry.Inputs[Sort Input].Columns[EntryType]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="EntryType"
-                      lineageId="Package\Transfer DataEntries\OLTP data entry.Outputs[OLE DB Source Output].Columns[EntryType]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the comparison options for character data."
-                          name="NewComparisonFlags">0</property>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">0</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Transfer DataEntries\Sort data entry.Inputs[Sort Input].Columns[DateRecorded]"
-                      cachedDataType="dbTimeStamp"
-                      cachedName="DateRecorded"
-                      lineageId="Package\Transfer DataEntries\OLTP data entry.Outputs[OLE DB Source Output].Columns[DateRecorded]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the comparison options for character data."
-                          name="NewComparisonFlags">0</property>
-                        <property
-                          dataType="System.Int32"
-                          description="Specifies the sort order of the column."
-                          name="NewSortKeyPosition">0</property>
-                      </properties>
-                    </inputColumn>
-                  </inputColumns>
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Transfer DataEntries\Sort data entry.Outputs[Sort Output]"
-                  isSorted="true"
-                  name="Sort Output">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Transfer DataEntries\Sort data entry.Outputs[Sort Output].Columns[ID]"
-                      dataType="i8"
-                      lineageId="Package\Transfer DataEntries\Sort data entry.Outputs[Sort Output].Columns[ID]"
-                      name="ID"
-                      sortKeyPosition="1">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Transfer DataEntries\OLTP data entry.Outputs[OLE DB Source Output].Columns[ID]}</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Transfer DataEntries\Sort data entry.Outputs[Sort Output].Columns[JourneyId]"
-                      dataType="guid"
-                      lineageId="Package\Transfer DataEntries\Sort data entry.Outputs[Sort Output].Columns[JourneyId]"
-                      name="JourneyId">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Transfer DataEntries\OLTP data entry.Outputs[OLE DB Source Output].Columns[JourneyId]}</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Transfer DataEntries\Sort data entry.Outputs[Sort Output].Columns[DeviceId]"
-                      dataType="guid"
-                      lineageId="Package\Transfer DataEntries\Sort data entry.Outputs[Sort Output].Columns[DeviceId]"
-                      name="DeviceId">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Transfer DataEntries\OLTP data entry.Outputs[OLE DB Source Output].Columns[DeviceId]}</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Transfer DataEntries\Sort data entry.Outputs[Sort Output].Columns[DateStored]"
-                      dataType="dbTimeStamp"
-                      lineageId="Package\Transfer DataEntries\Sort data entry.Outputs[Sort Output].Columns[DateStored]"
-                      name="DateStored">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Transfer DataEntries\OLTP data entry.Outputs[OLE DB Source Output].Columns[DateStored]}</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Transfer DataEntries\Sort data entry.Outputs[Sort Output].Columns[DateReceived]"
-                      dataType="dbTimeStamp"
-                      lineageId="Package\Transfer DataEntries\Sort data entry.Outputs[Sort Output].Columns[DateReceived]"
-                      name="DateReceived">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Transfer DataEntries\OLTP data entry.Outputs[OLE DB Source Output].Columns[DateReceived]}</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Transfer DataEntries\Sort data entry.Outputs[Sort Output].Columns[EntryType]"
-                      dataType="wstr"
-                      length="50"
-                      lineageId="Package\Transfer DataEntries\Sort data entry.Outputs[Sort Output].Columns[EntryType]"
-                      name="EntryType">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Transfer DataEntries\OLTP data entry.Outputs[OLE DB Source Output].Columns[EntryType]}</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Transfer DataEntries\Sort data entry.Outputs[Sort Output].Columns[DateRecorded]"
-                      dataType="dbTimeStamp"
-                      lineageId="Package\Transfer DataEntries\Sort data entry.Outputs[Sort Output].Columns[DateRecorded]"
-                      name="DateRecorded">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Transfer DataEntries\OLTP data entry.Outputs[OLE DB Source Output].Columns[DateRecorded]}</property>
-                      </properties>
-                    </outputColumn>
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
               refId="Package\Transfer DataEntries\sort data entry"
               componentClassID="Microsoft.Sort"
               contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
@@ -7429,6 +7185,250 @@ WHERE        (DeviceId IS NOT NULL)</property>
                       refId="Package\Transfer DataEntries\sort data entry.Outputs[Sort Output].Columns[DateRecorded]"
                       dataType="dbTimeStamp"
                       lineageId="Package\Transfer DataEntries\sort data entry.Outputs[Sort Output].Columns[DateRecorded]"
+                      name="DateRecorded">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Transfer DataEntries\OLTP data entry.Outputs[OLE DB Source Output].Columns[DateRecorded]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Transfer DataEntries\Sort data entry"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort data entry"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Transfer DataEntries\Sort data entry.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Transfer DataEntries\Sort data entry.Inputs[Sort Input].Columns[ID]"
+                      cachedDataType="i8"
+                      cachedName="ID"
+                      lineageId="Package\Transfer DataEntries\OLTP data entry.Outputs[OLE DB Source Output].Columns[ID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Transfer DataEntries\Sort data entry.Inputs[Sort Input].Columns[JourneyId]"
+                      cachedDataType="guid"
+                      cachedName="JourneyId"
+                      lineageId="Package\Transfer DataEntries\OLTP data entry.Outputs[OLE DB Source Output].Columns[JourneyId]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Transfer DataEntries\Sort data entry.Inputs[Sort Input].Columns[DeviceId]"
+                      cachedDataType="guid"
+                      cachedName="DeviceId"
+                      lineageId="Package\Transfer DataEntries\OLTP data entry.Outputs[OLE DB Source Output].Columns[DeviceId]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Transfer DataEntries\Sort data entry.Inputs[Sort Input].Columns[DateStored]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DateStored"
+                      lineageId="Package\Transfer DataEntries\OLTP data entry.Outputs[OLE DB Source Output].Columns[DateStored]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Transfer DataEntries\Sort data entry.Inputs[Sort Input].Columns[DateReceived]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DateReceived"
+                      lineageId="Package\Transfer DataEntries\OLTP data entry.Outputs[OLE DB Source Output].Columns[DateReceived]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Transfer DataEntries\Sort data entry.Inputs[Sort Input].Columns[EntryType]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="EntryType"
+                      lineageId="Package\Transfer DataEntries\OLTP data entry.Outputs[OLE DB Source Output].Columns[EntryType]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Transfer DataEntries\Sort data entry.Inputs[Sort Input].Columns[DateRecorded]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DateRecorded"
+                      lineageId="Package\Transfer DataEntries\OLTP data entry.Outputs[OLE DB Source Output].Columns[DateRecorded]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Transfer DataEntries\Sort data entry.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Transfer DataEntries\Sort data entry.Outputs[Sort Output].Columns[ID]"
+                      dataType="i8"
+                      lineageId="Package\Transfer DataEntries\Sort data entry.Outputs[Sort Output].Columns[ID]"
+                      name="ID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Transfer DataEntries\OLTP data entry.Outputs[OLE DB Source Output].Columns[ID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Transfer DataEntries\Sort data entry.Outputs[Sort Output].Columns[JourneyId]"
+                      dataType="guid"
+                      lineageId="Package\Transfer DataEntries\Sort data entry.Outputs[Sort Output].Columns[JourneyId]"
+                      name="JourneyId">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Transfer DataEntries\OLTP data entry.Outputs[OLE DB Source Output].Columns[JourneyId]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Transfer DataEntries\Sort data entry.Outputs[Sort Output].Columns[DeviceId]"
+                      dataType="guid"
+                      lineageId="Package\Transfer DataEntries\Sort data entry.Outputs[Sort Output].Columns[DeviceId]"
+                      name="DeviceId">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Transfer DataEntries\OLTP data entry.Outputs[OLE DB Source Output].Columns[DeviceId]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Transfer DataEntries\Sort data entry.Outputs[Sort Output].Columns[DateStored]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Transfer DataEntries\Sort data entry.Outputs[Sort Output].Columns[DateStored]"
+                      name="DateStored">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Transfer DataEntries\OLTP data entry.Outputs[OLE DB Source Output].Columns[DateStored]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Transfer DataEntries\Sort data entry.Outputs[Sort Output].Columns[DateReceived]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Transfer DataEntries\Sort data entry.Outputs[Sort Output].Columns[DateReceived]"
+                      name="DateReceived">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Transfer DataEntries\OLTP data entry.Outputs[OLE DB Source Output].Columns[DateReceived]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Transfer DataEntries\Sort data entry.Outputs[Sort Output].Columns[EntryType]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Transfer DataEntries\Sort data entry.Outputs[Sort Output].Columns[EntryType]"
+                      name="EntryType">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Transfer DataEntries\OLTP data entry.Outputs[OLE DB Source Output].Columns[EntryType]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Transfer DataEntries\Sort data entry.Outputs[Sort Output].Columns[DateRecorded]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Transfer DataEntries\Sort data entry.Outputs[Sort Output].Columns[DateRecorded]"
                       name="DateRecorded">
                       <properties>
                         <property
@@ -9518,14 +9518,14 @@ WHERE        (DeviceId IS NOT NULL)</property>
               startId="Package\Transfer DataEntries\Split on type.Outputs[GPS_data]" />
             <path
               refId="Package\Transfer DataEntries.Paths[Merge Join Output4]"
-              endId="Package\Transfer DataEntries\Sort deviceId.Inputs[Sort Input]"
+              endId="Package\Transfer DataEntries\Sort dataEntry.Inputs[Sort Input]"
               name="Merge Join Output"
-              startId="Package\Transfer DataEntries\Merge Join.Outputs[Merge Join Output]" />
+              startId="Package\Transfer DataEntries\Merge userId.Outputs[Merge Join Output]" />
             <path
               refId="Package\Transfer DataEntries.Paths[Merge Join Output3]"
-              endId="Package\Transfer DataEntries\Merge.Inputs[Merge Input 2]"
+              endId="Package\Transfer DataEntries\Add Hour.Inputs[Derived Column Input]"
               name="Merge Join Output"
-              startId="Package\Transfer DataEntries\join gps data.Outputs[Merge Join Output]" />
+              startId="Package\Transfer DataEntries\merge notifications.Outputs[Merge Join Output]" />
             <path
               refId="Package\Transfer DataEntries.Paths[Merge Join Output5]"
               endId="Package\Transfer DataEntries\OLE DB Destination.Inputs[OLE DB Destination Input]"
@@ -9533,19 +9533,19 @@ WHERE        (DeviceId IS NOT NULL)</property>
               startId="Package\Transfer DataEntries\Merge Join 1.Outputs[Merge Join Output]" />
             <path
               refId="Package\Transfer DataEntries.Paths[Merge Join Output1]"
+              endId="Package\Transfer DataEntries\Merge.Inputs[Merge Input 2]"
+              name="Merge Join Output"
+              startId="Package\Transfer DataEntries\join gps data.Outputs[Merge Join Output]" />
+            <path
+              refId="Package\Transfer DataEntries.Paths[Merge Join Output]"
+              endId="Package\Transfer DataEntries\Sort deviceId.Inputs[Sort Input]"
+              name="Merge Join Output"
+              startId="Package\Transfer DataEntries\Merge Join.Outputs[Merge Join Output]" />
+            <path
+              refId="Package\Transfer DataEntries.Paths[Merge Join Output2]"
               endId="Package\Transfer DataEntries\Merge.Inputs[Merge Input 1]"
               name="Merge Join Output"
               startId="Package\Transfer DataEntries\join battery.Outputs[Merge Join Output]" />
-            <path
-              refId="Package\Transfer DataEntries.Paths[Merge Join Output]"
-              endId="Package\Transfer DataEntries\Add Hour.Inputs[Derived Column Input]"
-              name="Merge Join Output"
-              startId="Package\Transfer DataEntries\merge notifications.Outputs[Merge Join Output]" />
-            <path
-              refId="Package\Transfer DataEntries.Paths[Merge Join Output2]"
-              endId="Package\Transfer DataEntries\Sort dataEntry.Inputs[Sort Input]"
-              name="Merge Join Output"
-              startId="Package\Transfer DataEntries\Merge userId.Outputs[Merge Join Output]" />
             <path
               refId="Package\Transfer DataEntries.Paths[Merge Output 1]"
               endId="Package\Transfer DataEntries\Sort.Inputs[Sort Input]"
@@ -9558,46 +9558,46 @@ WHERE        (DeviceId IS NOT NULL)</property>
               startId="Package\Transfer DataEntries\Multicast.Outputs[Multicast Output 1]" />
             <path
               refId="Package\Transfer DataEntries.Paths[OLE DB Source Output6]"
-              endId="Package\Transfer DataEntries\Sort 3.Inputs[Sort Input]"
-              name="OLE DB Source Output"
-              startId="Package\Transfer DataEntries\OLE DB Source 1.Outputs[OLE DB Source Output]" />
-            <path
-              refId="Package\Transfer DataEntries.Paths[OLE DB Source Output5]"
-              endId="Package\Transfer DataEntries\Sort 2.Inputs[Sort Input]"
-              name="OLE DB Source Output"
-              startId="Package\Transfer DataEntries\users.Outputs[OLE DB Source Output]" />
-            <path
-              refId="Package\Transfer DataEntries.Paths[OLE DB Source Output4]"
-              endId="Package\Transfer DataEntries\Sort battery.Inputs[Sort Input]"
-              name="OLE DB Source Output"
-              startId="Package\Transfer DataEntries\Battery Data.Outputs[OLE DB Source Output]" />
-            <path
-              refId="Package\Transfer DataEntries.Paths[OLE DB Source Output2]"
-              endId="Package\Transfer DataEntries\Sort by data id.Inputs[Sort Input]"
-              name="OLE DB Source Output"
-              startId="Package\Transfer DataEntries\notifications.Outputs[OLE DB Source Output]" />
-            <path
-              refId="Package\Transfer DataEntries.Paths[OLE DB Source Output1]"
-              endId="Package\Transfer DataEntries\Multicast.Inputs[Multicast Input 1]"
-              name="OLE DB Source Output"
-              startId="Package\Transfer DataEntries\OLTP data entry.Outputs[OLE DB Source Output]" />
-            <path
-              refId="Package\Transfer DataEntries.Paths[OLE DB Source Output]"
-              endId="Package\Transfer DataEntries\Sort gps.Inputs[Sort Input]"
-              name="OLE DB Source Output"
-              startId="Package\Transfer DataEntries\OLE DB Source.Outputs[OLE DB Source Output]" />
-            <path
-              refId="Package\Transfer DataEntries.Paths[OLE DB Source Output3]"
               endId="Package\Transfer DataEntries\Sort 1.Inputs[Sort Input]"
               name="OLE DB Source Output"
               startId="Package\Transfer DataEntries\OLAP data type.Outputs[OLE DB Source Output]" />
             <path
-              refId="Package\Transfer DataEntries.Paths[Sort Output11]"
-              endId="Package\Transfer DataEntries\Merge Join 1.Inputs[Merge Join Right Input]"
-              name="Sort Output"
-              startId="Package\Transfer DataEntries\Sort 3.Outputs[Sort Output]" />
+              refId="Package\Transfer DataEntries.Paths[OLE DB Source Output5]"
+              endId="Package\Transfer DataEntries\Sort gps.Inputs[Sort Input]"
+              name="OLE DB Source Output"
+              startId="Package\Transfer DataEntries\OLE DB Source.Outputs[OLE DB Source Output]" />
             <path
-              refId="Package\Transfer DataEntries.Paths[Sort Output]"
+              refId="Package\Transfer DataEntries.Paths[OLE DB Source Output4]"
+              endId="Package\Transfer DataEntries\Multicast.Inputs[Multicast Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Transfer DataEntries\OLTP data entry.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Transfer DataEntries.Paths[OLE DB Source Output2]"
+              endId="Package\Transfer DataEntries\Sort battery.Inputs[Sort Input]"
+              name="OLE DB Source Output"
+              startId="Package\Transfer DataEntries\Battery Data.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Transfer DataEntries.Paths[OLE DB Source Output1]"
+              endId="Package\Transfer DataEntries\Sort 2.Inputs[Sort Input]"
+              name="OLE DB Source Output"
+              startId="Package\Transfer DataEntries\users.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Transfer DataEntries.Paths[OLE DB Source Output]"
+              endId="Package\Transfer DataEntries\Sort 3.Inputs[Sort Input]"
+              name="OLE DB Source Output"
+              startId="Package\Transfer DataEntries\OLE DB Source 1.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Transfer DataEntries.Paths[OLE DB Source Output3]"
+              endId="Package\Transfer DataEntries\Sort by data id.Inputs[Sort Input]"
+              name="OLE DB Source Output"
+              startId="Package\Transfer DataEntries\notifications.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Transfer DataEntries.Paths[Sort Output11]"
+              endId="Package\Transfer DataEntries\Merge userId.Inputs[Merge Join Left Input]"
+              name="Sort Output"
+              startId="Package\Transfer DataEntries\Sort deviceId.Outputs[Sort Output]" />
+            <path
+              refId="Package\Transfer DataEntries.Paths[Sort Output1]"
               endId="Package\Transfer DataEntries\join gps data.Inputs[Merge Join Right Input]"
               name="Sort Output"
               startId="Package\Transfer DataEntries\Sort gps.Outputs[Sort Output]" />
@@ -9647,10 +9647,10 @@ WHERE        (DeviceId IS NOT NULL)</property>
               name="Sort Output"
               startId="Package\Transfer DataEntries\Sort hour.Outputs[Sort Output]" />
             <path
-              refId="Package\Transfer DataEntries.Paths[Sort Output1]"
-              endId="Package\Transfer DataEntries\Merge userId.Inputs[Merge Join Left Input]"
+              refId="Package\Transfer DataEntries.Paths[Sort Output]"
+              endId="Package\Transfer DataEntries\Merge Join 1.Inputs[Merge Join Right Input]"
               name="Sort Output"
-              startId="Package\Transfer DataEntries\Sort deviceId.Outputs[Sort Output]" />
+              startId="Package\Transfer DataEntries\Sort 3.Outputs[Sort Output]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -11959,6 +11959,30 @@ WHERE        (DeviceId IS NOT NULL)</property>
                       cachedName="NotificationCategoryId"
                       externalMetadataColumnId="Package\Transfer notifications\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NotificationCategory]"
                       lineageId="Package\Transfer notifications\OLE DB Source.Outputs[OLE DB Source Output].Columns[NotificationCategoryId]" />
+                    <inputColumn
+                      refId="Package\Transfer notifications\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DateEventStarted]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DateEventStarted"
+                      externalMetadataColumnId="Package\Transfer notifications\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateEventStarted]"
+                      lineageId="Package\Transfer notifications\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateEventStarted]" />
+                    <inputColumn
+                      refId="Package\Transfer notifications\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DateEventEnded]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DateEventEnded"
+                      externalMetadataColumnId="Package\Transfer notifications\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateEventEnded]"
+                      lineageId="Package\Transfer notifications\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateEventEnded]" />
+                    <inputColumn
+                      refId="Package\Transfer notifications\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[JourneyId]"
+                      cachedDataType="guid"
+                      cachedName="JourneyId"
+                      externalMetadataColumnId="Package\Transfer notifications\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[JourneyId]"
+                      lineageId="Package\Transfer notifications\OLE DB Source.Outputs[OLE DB Source Output].Columns[JourneyId]" />
+                    <inputColumn
+                      refId="Package\Transfer notifications\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DeviceId]"
+                      cachedDataType="guid"
+                      cachedName="DeviceId"
+                      externalMetadataColumnId="Package\Transfer notifications\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DeviceID]"
+                      lineageId="Package\Transfer notifications\OLE DB Source.Outputs[OLE DB Source Output].Columns[DeviceId]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -11971,6 +11995,22 @@ WHERE        (DeviceId IS NOT NULL)</property>
                       dataType="wstr"
                       length="50"
                       name="NotificationCategory" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer notifications\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateEventStarted]"
+                      dataType="dbTimeStamp"
+                      name="DateEventStarted" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer notifications\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateEventEnded]"
+                      dataType="dbTimeStamp"
+                      name="DateEventEnded" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer notifications\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[JourneyId]"
+                      dataType="guid"
+                      name="JourneyId" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer notifications\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DeviceID]"
+                      dataType="guid"
+                      name="DeviceID" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -13277,6 +13317,643 @@ WHERE        (DeviceId IS NOT NULL)</property>
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Transfer users"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{5BF15F80-6D66-49E9-989C-AB54E9ED6577}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Transfer users"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Transfer users\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Users]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">true</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Transfer users\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{C9C50E2A-F29B-496B-B77A-EC7F8882ABFE}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.BI_warehouse]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Transfer users\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Transfer users\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ID]"
+                      cachedDataType="guid"
+                      cachedName="ID"
+                      externalMetadataColumnId="Package\Transfer users\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ID]"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[ID]" />
+                    <inputColumn
+                      refId="Package\Transfer users\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[UserName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="UserName"
+                      externalMetadataColumnId="Package\Transfer users\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[username]"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[UserName]" />
+                    <inputColumn
+                      refId="Package\Transfer users\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FirstName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="FirstName"
+                      externalMetadataColumnId="Package\Transfer users\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[FirstName]" />
+                    <inputColumn
+                      refId="Package\Transfer users\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LastName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="LastName"
+                      externalMetadataColumnId="Package\Transfer users\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastName]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Transfer users\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ID]"
+                      dataType="guid"
+                      name="ID" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer users\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[username]"
+                      dataType="wstr"
+                      length="50"
+                      name="username" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer users\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="100"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer users\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
+                      dataType="wstr"
+                      length="100"
+                      name="LastName" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Transfer users\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Transfer users\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Transfer users\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Transfer users\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Transfer users\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[askari].[Users]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Transfer users\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="{64E39737-3E99-4D76-B192-C310ADCD6107}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[localhost.BI_oltp]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[ID]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ID]"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[ID]"
+                      name="ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[UserName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[UserName]"
+                      length="50"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[UserName]"
+                      name="UserName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[FirstName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                      length="100"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[FirstName]"
+                      name="FirstName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                      length="100"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastName]"
+                      name="LastName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsActive]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsActive]"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsActive]"
+                      name="IsActive"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhoneNumber]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PhoneNumber]"
+                      length="100"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhoneNumber]"
+                      name="PhoneNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[EmailAddress]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EmailAddress]"
+                      length="100"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[EmailAddress]"
+                      name="EmailAddress"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[Address]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Address]"
+                      length="250"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[Address]"
+                      name="Address"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[Country]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Country]"
+                      length="50"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[Country]"
+                      name="Country"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[CountryCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CountryCode]"
+                      length="2"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[CountryCode]"
+                      name="CountryCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[UserTypeFK]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[UserTypeFK]"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[UserTypeFK]"
+                      name="UserTypeFK"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateCreated]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DateCreated]"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateCreated]"
+                      name="DateCreated"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[salt]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[salt]"
+                      length="32"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[salt]"
+                      name="salt"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[password]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[password]"
+                      length="128"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[password]"
+                      name="password"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[version]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[version]"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[version]"
+                      name="version"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsDeleted]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsDeleted]"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsDeleted]"
+                      name="IsDeleted"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[FirebaseToken]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FirebaseToken]"
+                      length="500"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[FirebaseToken]"
+                      name="FirebaseToken"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[Gender]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Gender]"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[Gender]"
+                      name="Gender"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateOfBirth]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DateOfBirth]"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateOfBirth]"
+                      name="DateOfBirth"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ID]"
+                      dataType="guid"
+                      name="ID" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[UserName]"
+                      dataType="wstr"
+                      length="50"
+                      name="UserName" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="100"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                      dataType="wstr"
+                      length="100"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsActive]"
+                      dataType="bool"
+                      name="IsActive" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PhoneNumber]"
+                      dataType="wstr"
+                      length="100"
+                      name="PhoneNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EmailAddress]"
+                      dataType="wstr"
+                      length="100"
+                      name="EmailAddress" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Address]"
+                      dataType="wstr"
+                      length="250"
+                      name="Address" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Country]"
+                      dataType="wstr"
+                      length="50"
+                      name="Country" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CountryCode]"
+                      dataType="wstr"
+                      length="2"
+                      name="CountryCode" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[UserTypeFK]"
+                      dataType="i4"
+                      name="UserTypeFK" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DateCreated]"
+                      dataType="dbTimeStamp"
+                      name="DateCreated" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[salt]"
+                      dataType="wstr"
+                      length="32"
+                      name="salt" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[password]"
+                      dataType="wstr"
+                      length="128"
+                      name="password" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[version]"
+                      dataType="i4"
+                      name="version" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsDeleted]"
+                      dataType="bool"
+                      name="IsDeleted" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FirebaseToken]"
+                      dataType="wstr"
+                      length="500"
+                      name="FirebaseToken" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Gender]"
+                      dataType="bool"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DateOfBirth]"
+                      dataType="dbDate"
+                      name="DateOfBirth" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ID]"
+                      dataType="guid"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ID]"
+                      name="ID" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[UserName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[UserName]"
+                      name="UserName" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                      name="FirstName" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                      name="LastName" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsActive]"
+                      dataType="bool"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsActive]"
+                      name="IsActive" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PhoneNumber]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PhoneNumber]"
+                      name="PhoneNumber" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EmailAddress]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EmailAddress]"
+                      name="EmailAddress" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Address]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Address]"
+                      name="Address" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Country]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Country]"
+                      name="Country" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CountryCode]"
+                      dataType="wstr"
+                      length="2"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CountryCode]"
+                      name="CountryCode" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[UserTypeFK]"
+                      dataType="i4"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[UserTypeFK]"
+                      name="UserTypeFK" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DateCreated]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DateCreated]"
+                      name="DateCreated" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[salt]"
+                      dataType="wstr"
+                      length="32"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[salt]"
+                      name="salt" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[password]"
+                      dataType="wstr"
+                      length="128"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[password]"
+                      name="password" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[version]"
+                      dataType="i4"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[version]"
+                      name="version" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsDeleted]"
+                      dataType="bool"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsDeleted]"
+                      name="IsDeleted" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FirebaseToken]"
+                      dataType="wstr"
+                      length="500"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FirebaseToken]"
+                      name="FirebaseToken" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Gender]"
+                      dataType="bool"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Gender]"
+                      name="Gender" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DateOfBirth]"
+                      dataType="dbDate"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DateOfBirth]"
+                      name="DateOfBirth" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Transfer users.Paths[OLE DB Source Output]"
+              endId="Package\Transfer users\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Transfer users\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
   </DTS:Executables>
   <DTS:PrecedenceConstraints>
     <DTS:PrecedenceConstraint
@@ -13295,6 +13972,22 @@ WHERE        (DeviceId IS NOT NULL)</property>
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
       DTS:To="Package\Transfer Device Journeys" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 10]"
+      DTS:CreationName=""
+      DTS:DTSID="{DDD2C5E9-A5E7-4C20-AD2A-A9A8971A027C}"
+      DTS:From="Package\Transfer types and categories"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 10"
+      DTS:To="Package\Transfer users" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 11]"
+      DTS:CreationName=""
+      DTS:DTSID="{5800065D-5DAE-4D1E-87E1-D2B99A69925D}"
+      DTS:From="Package\Transfer users"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 11"
+      DTS:To="Package\Transfer DataEntries" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
       DTS:CreationName=""
@@ -13375,42 +14068,42 @@ WHERE        (DeviceId IS NOT NULL)</property>
         <NodeLayout
           Size="148,42"
           Id="Package\Clear all tables"
-          TopLeft="24,53" />
+          TopLeft="24,76" />
         <NodeLayout
           Size="176,42"
           Id="Package\Transfer DataEntries"
-          TopLeft="1009.5,123.5" />
+          TopLeft="1009.5,146.5" />
         <NodeLayout
           Size="198,42"
           Id="Package\Transfer Device Journeys"
-          TopLeft="708.5,128.5" />
+          TopLeft="708.5,151.5" />
         <NodeLayout
           Size="156,42"
           Id="Package\Transfer devices"
-          TopLeft="244.5,130.5" />
+          TopLeft="244.5,153.5" />
         <NodeLayout
           Size="206,44"
           Id="Package\Transfer Geo-Fence coords"
-          TopLeft="701.5,184.5" />
+          TopLeft="701.5,207.5" />
         <NodeLayout
           Size="176,42"
           Id="Package\Transfer Geo-Fences"
-          TopLeft="475.5,200.5" />
+          TopLeft="475.5,223.5" />
         <NodeLayout
           Size="232,42"
           Id="Package\Transfer notification preferences"
-          TopLeft="209,202" />
+          TopLeft="209,225" />
         <NodeLayout
           Size="178,42"
           Id="Package\Transfer notifications"
-          TopLeft="728.5,66.5" />
+          TopLeft="728.5,89.5" />
         <NodeLayout
           Size="219,42"
           Id="Package\Transfer types and categories"
-          TopLeft="215,51" />
+          TopLeft="215,74" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="172,73">
+          TopLeft="172,96">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -13432,7 +14125,7 @@ WHERE        (DeviceId IS NOT NULL)</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="400.5,150.5">
+          TopLeft="400.5,173.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -13454,7 +14147,7 @@ WHERE        (DeviceId IS NOT NULL)</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="323.5,93">
+          TopLeft="323.5,116">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -13476,7 +14169,7 @@ WHERE        (DeviceId IS NOT NULL)</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="434,72">
+          TopLeft="434,95">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -13510,7 +14203,7 @@ WHERE        (DeviceId IS NOT NULL)</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="441,222.25">
+          TopLeft="441,245.25">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -13532,7 +14225,7 @@ WHERE        (DeviceId IS NOT NULL)</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 5]"
-          TopLeft="323.75,172.5">
+          TopLeft="323.75,195.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -13554,7 +14247,7 @@ WHERE        (DeviceId IS NOT NULL)</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 6]"
-          TopLeft="651.5,221.5">
+          TopLeft="651.5,244.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -13588,7 +14281,7 @@ WHERE        (DeviceId IS NOT NULL)</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 7]"
-          TopLeft="906.5,87.5">
+          TopLeft="906.5,110.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -13622,7 +14315,7 @@ WHERE        (DeviceId IS NOT NULL)</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 8]"
-          TopLeft="906.5,147">
+          TopLeft="906.5,170">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -13644,7 +14337,7 @@ WHERE        (DeviceId IS NOT NULL)</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 9]"
-          TopLeft="907.5,206.5">
+          TopLeft="907.5,229.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -13676,6 +14369,78 @@ WHERE        (DeviceId IS NOT NULL)</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="146,42"
+          Id="Package\Transfer users"
+          TopLeft="751,0" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 10]"
+          TopLeft="324.5,74">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="476.5,-32"
+              Start="0,0"
+              End="476.5,-24.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-14.9918699186992" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-14.9918699186992"
+                    Point2="0,-18.9918699186992"
+                    Point3="4,-18.9918699186992" />
+                  <mssgle:LineSegment
+                    End="472.5,-18.9918699186992" />
+                  <mssgle:CubicBezierSegment
+                    Point1="472.5,-18.9918699186992"
+                    Point2="476.5,-18.9918699186992"
+                    Point3="476.5,-22.9918699186992" />
+                  <mssgle:LineSegment
+                    End="476.5,-24.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 11]"
+          TopLeft="847,42">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="250.5,104.5"
+              Start="0,0"
+              End="250.5,97">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.479674796748" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,38.479674796748"
+                    Point2="0,42.479674796748"
+                    Point3="4,42.479674796748" />
+                  <mssgle:LineSegment
+                    End="246.5,42.479674796748" />
+                  <mssgle:CubicBezierSegment
+                    Point1="246.5,42.479674796748"
+                    Point2="250.5,42.479674796748"
+                    Point3="250.5,46.479674796748" />
+                  <mssgle:LineSegment
+                    End="250.5,97" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -13685,29 +14450,29 @@ WHERE        (DeviceId IS NOT NULL)</property>
       <GraphLayout
         Capacity="64" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
+          Size="138,42"
+          Id="Package\Transfer DataEntries\Split on type"
+          TopLeft="643.5,159.5" />
+        <NodeLayout
           Size="156,42"
           Id="Package\Transfer DataEntries\OLTP data entry"
           TopLeft="634.5,0.5" />
-        <NodeLayout
-          Size="136,42"
-          Id="Package\Transfer DataEntries\notifications"
-          TopLeft="860.5,682.5" />
-        <NodeLayout
-          Size="120,42"
-          Id="Package\Transfer DataEntries\Multicast"
-          TopLeft="659.5,84.5" />
-        <NodeLayout
-          Size="152,42"
-          Id="Package\Transfer DataEntries\OLAP data type"
-          TopLeft="835.5,336.779132791328" />
         <NodeLayout
           Size="149,42"
           Id="Package\Transfer DataEntries\sort data entry"
           TopLeft="846,164" />
         <NodeLayout
-          Size="104,42"
-          Id="Package\Transfer DataEntries\users"
-          TopLeft="443.5,502.5" />
+          Size="147,42"
+          Id="Package\Transfer DataEntries\Sort dataEntry"
+          TopLeft="644.5,682.5" />
+        <NodeLayout
+          Size="107,42"
+          Id="Package\Transfer DataEntries\Sort 2"
+          TopLeft="442.5,597.5" />
+        <NodeLayout
+          Size="169,42"
+          Id="Package\Transfer DataEntries\merge notifications"
+          TopLeft="636.5,770.276923076923" />
         <NodeLayout
           Size="130,42"
           Id="Package\Transfer DataEntries\Merge Join"
@@ -13717,77 +14482,133 @@ WHERE        (DeviceId IS NOT NULL)</property>
           Id="Package\Transfer DataEntries\join gps data"
           TopLeft="929.5,258.5" />
         <NodeLayout
-          Size="123,42"
-          Id="Package\Transfer DataEntries\Sort hour"
-          TopLeft="664.5,926.5" />
+          Size="148,42"
+          Id="Package\Transfer DataEntries\Sort by data id"
+          TopLeft="860.5,766.5" />
         <NodeLayout
           Size="118,43"
           Id="Package\Transfer DataEntries\Sort gps"
           TopLeft="1023.5,164.5" />
         <NodeLayout
-          Size="148,42"
-          Id="Package\Transfer DataEntries\Sort by data id"
-          TopLeft="860.5,766.5" />
-        <NodeLayout
-          Size="150,42"
-          Id="Package\Transfer DataEntries\OLE DB Source"
-          TopLeft="1008.5,66.5" />
+          Size="159,42"
+          Id="Package\Transfer DataEntries\OLE DB Source 1"
+          TopLeft="435,923" />
         <NodeLayout
           Size="135,44"
           Id="Package\Transfer DataEntries\Sort battery"
           TopLeft="258,160" />
         <NodeLayout
-          Size="98,42"
-          Id="Package\Transfer DataEntries\Sort"
-          TopLeft="665.5,341.780701754386" />
+          Size="120,42"
+          Id="Package\Transfer DataEntries\Multicast"
+          TopLeft="659.5,84.5" />
+        <NodeLayout
+          Size="152,42"
+          Id="Package\Transfer DataEntries\OLAP data type"
+          TopLeft="835.5,336.779132791328" />
         <NodeLayout
           Size="150,42"
           Id="Package\Transfer DataEntries\Sort data entry"
           TopLeft="417.5,162.5" />
         <NodeLayout
-          Size="142,42"
-          Id="Package\Transfer DataEntries\Merge userId"
-          TopLeft="644.5,603.936999625251" />
-        <NodeLayout
-          Size="138,42"
-          Id="Package\Transfer DataEntries\Split on type"
-          TopLeft="643.5,159.5" />
-        <NodeLayout
-          Size="147,42"
-          Id="Package\Transfer DataEntries\Sort dataEntry"
-          TopLeft="644.5,682.5" />
+          Size="98,42"
+          Id="Package\Transfer DataEntries\Sort"
+          TopLeft="665.5,341.780701754386" />
         <NodeLayout
           Size="133,42"
           Id="Package\Transfer DataEntries\join battery"
           TopLeft="364.5,262.5" />
         <NodeLayout
-          Size="107,42"
-          Id="Package\Transfer DataEntries\Sort 2"
-          TopLeft="442.5,597.5" />
+          Size="142,42"
+          Id="Package\Transfer DataEntries\Merge userId"
+          TopLeft="644.5,603.936999625251" />
+        <NodeLayout
+          Size="104,42"
+          Id="Package\Transfer DataEntries\users"
+          TopLeft="443.5,502.5" />
+        <NodeLayout
+          Size="139,42"
+          Id="Package\Transfer DataEntries\Merge Join 1"
+          TopLeft="659,1007" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Transfer DataEntries\OLE DB Source"
+          TopLeft="1008.5,66.5" />
         <NodeLayout
           Size="108,42"
           Id="Package\Transfer DataEntries\Merge"
           TopLeft="666,262" />
         <NodeLayout
+          Size="136,42"
+          Id="Package\Transfer DataEntries\notifications"
+          TopLeft="860.5,682.5" />
+        <NodeLayout
+          Size="123,42"
+          Id="Package\Transfer DataEntries\Sort hour"
+          TopLeft="664.5,926.5" />
+        <NodeLayout
           Size="138,42"
           Id="Package\Transfer DataEntries\Battery Data"
           TopLeft="253.5,65.5" />
+        <NodeLayout
+          Size="141,42"
+          Id="Package\Transfer DataEntries\Sort deviceId"
+          TopLeft="639.5,504.936999625251" />
         <NodeLayout
           Size="107,42"
           Id="Package\Transfer DataEntries\Sort 1"
           TopLeft="859.5,413.779132791328" />
         <NodeLayout
-          Size="169,42"
-          Id="Package\Transfer DataEntries\merge notifications"
-          TopLeft="636.5,770.276923076923" />
-        <NodeLayout
           Size="123,42"
           Id="Package\Transfer DataEntries\Add Hour"
           TopLeft="660.5,850.5" />
         <NodeLayout
-          Size="141,42"
-          Id="Package\Transfer DataEntries\Sort deviceId"
-          TopLeft="639.5,504.936999625251" />
+          Size="107,42"
+          Id="Package\Transfer DataEntries\Sort 3"
+          TopLeft="455,1001" />
+        <EdgeLayout
+          Id="Package\Transfer DataEntries.Paths[Sort Output11]"
+          TopLeft="712.75,546.936999625251">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,57"
+              Start="0,0"
+              End="0,49.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Transfer DataEntries.Paths[Sort Output10]"
+          TopLeft="727.25,968.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38.5"
+              Start="0,0"
+              End="0,31">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\Transfer DataEntries.Paths[Sort Output9]"
           TopLeft="719.5,724.5">
@@ -14002,28 +14823,6 @@ WHERE        (DeviceId IS NOT NULL)</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Transfer DataEntries.Paths[Sort Output1]"
-          TopLeft="712.75,546.936999625251">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,57"
-              Start="0,0"
-              End="0,49.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,49.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Transfer DataEntries.Paths[Sort Output]"
           TopLeft="1082.5,207.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -14057,19 +14856,19 @@ WHERE        (DeviceId IS NOT NULL)</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Transfer DataEntries.Paths[OLE DB Source Output5]"
-          TopLeft="495.75,544.5">
+          Id="Package\Transfer DataEntries.Paths[Sort Output]"
+          TopLeft="562,1025">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,53"
+              EndConnector="97,0"
               Start="0,0"
-              End="0,45.5">
+              End="89.5,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,45.5" />
+                    End="89.5,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -14079,29 +14878,7 @@ WHERE        (DeviceId IS NOT NULL)</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Transfer DataEntries.Paths[OLE DB Source Output4]"
-          TopLeft="324,107.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,52.5"
-              Start="0,0"
-              End="0,45">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,45" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Transfer DataEntries.Paths[OLE DB Source Output3]"
+          Id="Package\Transfer DataEntries.Paths[OLE DB Source Output6]"
           TopLeft="912.25,378.779132791328">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -14123,19 +14900,19 @@ WHERE        (DeviceId IS NOT NULL)</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Transfer DataEntries.Paths[OLE DB Source Output2]"
-          TopLeft="931.5,724.5">
+          Id="Package\Transfer DataEntries.Paths[OLE DB Source Output5]"
+          TopLeft="1083,108.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,42"
+              EndConnector="0,56"
               Start="0,0"
-              End="0,34.5">
+              End="0,48.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,34.5" />
+                    End="0,48.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -14145,7 +14922,7 @@ WHERE        (DeviceId IS NOT NULL)</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Transfer DataEntries.Paths[OLE DB Source Output1]"
+          Id="Package\Transfer DataEntries.Paths[OLE DB Source Output4]"
           TopLeft="716,42.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -14167,19 +14944,85 @@ WHERE        (DeviceId IS NOT NULL)</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Transfer DataEntries.Paths[OLE DB Source Output]"
-          TopLeft="1083,108.5">
+          Id="Package\Transfer DataEntries.Paths[OLE DB Source Output3]"
+          TopLeft="931.5,724.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,56"
+              EndConnector="0,42"
               Start="0,0"
-              End="0,48.5">
+              End="0,34.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,48.5" />
+                    End="0,34.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Transfer DataEntries.Paths[OLE DB Source Output2]"
+          TopLeft="324,107.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,52.5"
+              Start="0,0"
+              End="0,45">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Transfer DataEntries.Paths[OLE DB Source Output1]"
+          TopLeft="495.75,544.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53"
+              Start="0,0"
+              End="0,45.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Transfer DataEntries.Paths[OLE DB Source Output]"
+          TopLeft="511.5,965">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36"
+              Start="0,0"
+              End="0,28.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -14234,50 +15077,6 @@ WHERE        (DeviceId IS NOT NULL)</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Transfer DataEntries.Paths[Merge Join Output4]"
-          TopLeft="711.25,460.779132791328">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,44.1578668339234"
-              Start="0,0"
-              End="0,36.6578668339234">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,36.6578668339234" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Transfer DataEntries.Paths[Merge Join Output3]"
-          TopLeft="929.5,281.25">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-155.5,0"
-              Start="0,0"
-              End="-148,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="-148,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Transfer DataEntries.Paths[Merge Join Output2]"
           TopLeft="716.75,645.936999625251">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -14299,7 +15098,29 @@ WHERE        (DeviceId IS NOT NULL)</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Transfer DataEntries.Paths[Merge Join Output1]"
+          Id="Package\Transfer DataEntries.Paths[Merge Join Output3]"
+          TopLeft="721.5,812.276923076923">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38.223076923077"
+              Start="0,0"
+              End="0,30.723076923077">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.723076923077" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Transfer DataEntries.Paths[Merge Join Output2]"
           TopLeft="497.5,283.25">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -14321,19 +15142,41 @@ WHERE        (DeviceId IS NOT NULL)</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Transfer DataEntries.Paths[Merge Join Output]"
-          TopLeft="721.5,812.276923076923">
+          Id="Package\Transfer DataEntries.Paths[Merge Join Output1]"
+          TopLeft="929.5,281.25">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,38.223076923077"
+              EndConnector="-155.5,0"
               Start="0,0"
-              End="0,30.723076923077">
+              End="-148,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,30.723076923077" />
+                    End="-148,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Transfer DataEntries.Paths[Merge Join Output]"
+          TopLeft="711.25,460.779132791328">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44.1578668339234"
+              Start="0,0"
+              End="0,36.6578668339234">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.6578668339234" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -14413,84 +15256,6 @@ WHERE        (DeviceId IS NOT NULL)</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <NodeLayout
-          Size="159,42"
-          Id="Package\Transfer DataEntries\OLE DB Source 1"
-          TopLeft="435,923" />
-        <NodeLayout
-          Size="107,42"
-          Id="Package\Transfer DataEntries\Sort 3"
-          TopLeft="455,1001" />
-        <EdgeLayout
-          Id="Package\Transfer DataEntries.Paths[OLE DB Source Output6]"
-          TopLeft="511.5,965">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,36"
-              Start="0,0"
-              End="0,28.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,28.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="139,42"
-          Id="Package\Transfer DataEntries\Merge Join 1"
-          TopLeft="659,1007" />
-        <EdgeLayout
-          Id="Package\Transfer DataEntries.Paths[Sort Output10]"
-          TopLeft="727.25,968.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,38.5"
-              Start="0,0"
-              End="0,31">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,31" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Transfer DataEntries.Paths[Sort Output11]"
-          TopLeft="562,1025">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="97,0"
-              Start="0,0"
-              End="89.5,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="89.5,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
           Size="171,42"
           Id="Package\Transfer DataEntries\OLE DB Destination"
           TopLeft="642,1087" />
@@ -14535,10 +15300,15 @@ WHERE        (DeviceId IS NOT NULL)</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Transfer DataEntries\notifications">
+    design-time-name="Package\Transfer DataEntries\OLE DB Source 1">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
@@ -14578,6 +15348,14 @@ WHERE        (DeviceId IS NOT NULL)</property>
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Transfer DataEntries\notifications">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
@@ -14956,7 +15734,7 @@ WHERE        (DeviceId IS NOT NULL)</property>
     design-time-name="Package\Transfer notifications">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="150,42"
           Id="Package\Transfer notifications\OLE DB Source"
@@ -14984,9 +15762,7 @@ WHERE        (DeviceId IS NOT NULL)</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-21.01857421875,57.44873046875,42.0371484375,9.6025390625"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -15022,79 +15798,35 @@ WHERE        (DeviceId IS NOT NULL)</property>
     design-time-name="Package\Transfer types and categories">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="169,42"
-          Id="Package\Transfer types and categories\OLAP - DeviceType"
-          TopLeft="364.5,230.5" />
-        <NodeLayout
-          Size="210,42"
-          Id="Package\Transfer types and categories\OLTP - NotificationCategory"
-          TopLeft="623.5,100.5" />
-        <NodeLayout
-          Size="210,42"
-          Id="Package\Transfer types and categories\OLAP - NotificationCategory"
-          TopLeft="630.5,232.5" />
+          Id="Package\Transfer types and categories\OLTP - DeviceType"
+          TopLeft="368.5,99.5" />
         <NodeLayout
           Size="160,42"
           Id="Package\Transfer types and categories\OLTP - DataType"
           TopLeft="85.5,99.5" />
         <NodeLayout
-          Size="127,42"
-          Id="Package\Transfer types and categories\Aggregate"
-          TopLeft="104.5,190.5" />
-        <NodeLayout
           Size="171,42"
           Id="Package\Transfer types and categories\OLE DB Destination"
           TopLeft="82.5,278.5" />
         <NodeLayout
+          Size="210,42"
+          Id="Package\Transfer types and categories\OLAP - NotificationCategory"
+          TopLeft="630.5,232.5" />
+        <NodeLayout
+          Size="210,42"
+          Id="Package\Transfer types and categories\OLTP - NotificationCategory"
+          TopLeft="623.5,100.5" />
+        <NodeLayout
+          Size="127,42"
+          Id="Package\Transfer types and categories\Aggregate"
+          TopLeft="104.5,190.5" />
+        <NodeLayout
           Size="169,42"
-          Id="Package\Transfer types and categories\OLTP - DeviceType"
-          TopLeft="368.5,99.5" />
-        <EdgeLayout
-          Id="Package\Transfer types and categories.Paths[OLE DB Source Output]"
-          TopLeft="451,141.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,89"
-              Start="0,0"
-              End="0,81.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,81.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Transfer types and categories.Paths[Aggregate Output 1]"
-          TopLeft="168,232.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,46"
-              Start="0,0"
-              End="0,38.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,38.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          Id="Package\Transfer types and categories\OLAP - DeviceType"
+          TopLeft="364.5,230.5" />
         <EdgeLayout
           Id="Package\Transfer types and categories.Paths[OLE DB Source Output2]"
           TopLeft="166.75,141.5">
@@ -15114,7 +15846,9 @@ WHERE        (DeviceId IS NOT NULL)</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -15136,40 +15870,64 @@ WHERE        (DeviceId IS NOT NULL)</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Transfer types and categories.Paths[OLE DB Source Output]"
+          TopLeft="451,141.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,89"
+              Start="0,0"
+              End="0,81.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,81.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Transfer types and categories.Paths[Aggregate Output 1]"
+          TopLeft="168,232.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46"
+              Start="0,0"
+              End="0,38.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Transfer types and categories\OLAP - DeviceType">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Transfer types and categories\OLTP - NotificationCategory">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Transfer types and categories\OLAP - NotificationCategory">
+    design-time-name="Package\Transfer types and categories\OLTP - DeviceType">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -15208,7 +15966,7 @@ WHERE        (DeviceId IS NOT NULL)</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Transfer types and categories\OLTP - DeviceType">
+    design-time-name="Package\Transfer types and categories\OLAP - NotificationCategory">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -15221,7 +15979,84 @@ WHERE        (DeviceId IS NOT NULL)</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Transfer DataEntries\OLE DB Source 1">
+    design-time-name="Package\Transfer types and categories\OLTP - NotificationCategory">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Transfer types and categories\OLAP - DeviceType">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Transfer users">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Transfer users\OLE DB Source"
+          TopLeft="399.5,69.5" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Transfer users\OLE DB Destination"
+          TopLeft="387,215" />
+        <EdgeLayout
+          Id="Package\Transfer users.Paths[OLE DB Source Output]"
+          TopLeft="473.5,111.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,103.5"
+              Start="0,0"
+              End="0,96">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,96" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Transfer users\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Transfer users\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
